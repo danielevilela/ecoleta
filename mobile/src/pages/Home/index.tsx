@@ -26,15 +26,15 @@ const Home = () => {
         <View style={styles.main}>
             <Image source={require('../../assets/logo.png')} />
             <View>
-                <Text style={styles.title}>Seu marketplace de coleta de residuos</Text>
-                <Text style={styles.description}>Ajudamos pessoas a encontrarem pontos de coleto de forma eficiente.</Text>
+                <Text style={styles.title}>Your marketplace of Recycling Centres</Text>
+                <Text style={styles.description}>We help you to find bins or drop-off locations that are located around the province.</Text>
             </View>
         </View>
         
         <View style={styles.footer}>
             <TextInput
                 style={styles.input}
-                placeholder="Digite a UF"
+                placeholder="Province"
                 value={uf}
                 maxLength={2}
                 autoCapitalize="characters"
@@ -43,7 +43,7 @@ const Home = () => {
             />
             <TextInput
                 style={styles.input}
-                placeholder="Digite a Cidade"
+                placeholder="City"
                 value={city}
                 autoCorrect={false}
                 onChangeText={setCity}
@@ -56,7 +56,7 @@ const Home = () => {
                     </Text>
                 </View>
                 <Text style={styles.buttonText}>
-                    Entrar
+                    Proceed
                 </Text>
             </RectButton>
         </View>

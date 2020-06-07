@@ -14,12 +14,12 @@ const Home:React.FC = () => {
                 </header>
                 
                 <main>
-                    <h1>Seu marketplace de coleta de residuos.</h1>
-                    <p>Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.</p>
+                    <h1>Your marketplace of Recycling Centres.</h1>
+                    <p>We help you to find bins or drop-off locations that are located around the province.</p>
 
                     <Link to="/create-point">
                         <span><FiLogIn /></span>
-                        <strong> Cadastre um ponto de coleta</strong>
+                        <strong> Register a new collection point</strong>
                     </Link>
                 </main>
             </div>

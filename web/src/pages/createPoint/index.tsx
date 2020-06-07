@@ -73,6 +73,19 @@ const CreatePoint = () => {
 
     }, [selectedUf]);
 
+    useEffect(()=>{
+
+        axios.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${selectedPosition[0]}&longitude=${selectedPosition[1]}`)
+        .then(({data}) => {
+            console.log(data);
+            setUfs([data.principalSubdivisionCode.substr(-2)]);
+            setSelectedUf(data.principalSubdivisionCode.substr(-2));
+            setCities([data.city]);
+            setSelectedCity(data.city);
+        });
+           
+    },[selectedPosition]);
+
     const handleSelectedUf = (event: ChangeEvent<HTMLSelectElement>) => {
         setSelectedUf(event.target.value);
     };
@@ -138,20 +151,20 @@ const CreatePoint = () => {
                 <img src={logo} alt="Ecoleta"/>
                 <Link to="/">
                     <FiArrowLeft />
-                    Voltar para home
+                    Home
                 </Link>
             </header>
             <form onSubmit={handleSubmit}>
-                <h1>Cadastro do <br /> ponto de coleta</h1>
+                <h1>Recycling Centre <br /> registration</h1>
 
                 <Dropzone onFileUploaded={setSelectedFile} />
 
                 <fieldset>
                     <legend>
-                        <h2>Dados</h2>
+                        <h2>Info</h2>
                     </legend>
                     <div className="field">
-                        <label htmlFor="name">Nome da entidade</label>
+                        <label htmlFor="name">Institution name</label>
                         <input
                             type="text"
                             name="name"
@@ -185,8 +198,8 @@ const CreatePoint = () => {
 
                 <fieldset>
                     <legend>
-                        <h2>Endereco</h2>
-                        <span>Selecione o endereco no mapa</span>
+                        <h2>Address</h2>
+                        <span>Click to mark the address in the map below:</span>
                     </legend>
 
                     <Map center={initialPosition} zoom={15} onclick={handleMapClick} >
@@ -199,16 +212,16 @@ const CreatePoint = () => {
 
                     <div className="field-group">
                         <div className="field">
-                            <label htmlFor="uf">Estado (UF)</label>
+                            <label htmlFor="uf">Province</label>
                             <select name="" id="" value={selectedUf} onChange={handleSelectedUf}>
-                                <option value="0">Selecione uma UF</option>
+                                <option value="0">Province</option>
                                 {ufs?.map((uf) => (<option key={uf} value={uf}>{uf}</option>))}
                             </select>
                         </div>
                         <div className="field">
-                            <label htmlFor="city">Cidade</label>
+                            <label htmlFor="city">City</label>
                             <select name="" id="" value={selectedCity} onChange={handleSelectedCity}>
-                                <option value="0">Selecione uma Cidade</option>
+                                <option value="0">City</option>
                                     {cities?.map(city => (<option key={city} value={city}>{city}</option>))}
                             </select>
                         </div>
@@ -217,8 +230,8 @@ const CreatePoint = () => {
 
                 <fieldset>
                     <legend>
-                        <h2>Items de coleta</h2>
-                        <span>Selecion um ou mais itens abaixo</span>
+                        <h2>Accepted items</h2>
+                        <span>Select one or more items below</span>
                     </legend>
                     <ul className="items-grid">
                         {items?.map((item) => (
@@ -235,7 +248,7 @@ const CreatePoint = () => {
                 </fieldset> 
 
                 <button type="submit">
-                    Cadastrar ponto de coleta
+                    Save
                 </button>
             </form>
         </div>
